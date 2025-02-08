@@ -1,0 +1,9 @@
+﻿@model asyncDrive.Web.Models.DTO.UserDetailDto
+
+<h2>Delete User</h2>
+<p>Are you sure you want to delete user: <strong>@Model.UserName</strong>?</p>
+
+<form asp-action="DeleteUser" method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-secondary" asp-controller="Users" asp-action="AllUsers">Cancel</a>
+</form>

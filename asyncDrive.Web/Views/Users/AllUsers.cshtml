@@ -1,0 +1,29 @@
+﻿@model IEnumerable<asyncDrive.Web.Models.DTO.UserDto>
+
+<h2>All Users</h2>
+<div class="mb-3">
+    <a class="btn btn-success" asp-controller="Users" asp-action="CreateUser">Create User</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Users" asp-action="UserDetails" asp-route-userId="@user.Id">Details</a>
+                    <a class="btn btn-warning" asp-controller="Users" asp-action="UpdateUser" asp-route-userId="@user.Id">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Users" asp-action="DeleteUserConfirmation" asp-route-userId="@user.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

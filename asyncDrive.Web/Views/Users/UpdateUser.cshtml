@@ -1,0 +1,17 @@
+﻿@model asyncDrive.Web.Models.DTO.UpdateUserDto
+
+<h2>Update User</h2>
+
+<form asp-action="UpdateUser" method="post">
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" />
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Update User</button>
+</form>
+
+<a class="btn btn-secondary mt-2" asp-controller="Users" asp-action="AllUsers">Back to Users</a>

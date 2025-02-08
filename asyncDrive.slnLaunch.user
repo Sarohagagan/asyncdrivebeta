@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Name": "asyncDriveAPI\\asyncDrive.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Name": "asyncDrive.Web\\asyncDrive.Web.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
