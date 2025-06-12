@@ -1,6 +1,7 @@
 ﻿@model asyncDrive.Web.Models.DTO.CreateUserDto
-
-<h2>Create User</h2>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="width: 100%;">
+        <h3 class="text-left mb-4">Create User</h3>
 
 <form asp-action="CreateUser" method="post">
     <div class="form-group">
@@ -26,9 +27,10 @@
 </form>
 
 <a class="btn btn-secondary mt-2" asp-controller="Users" asp-action="AllUsers">Back to Users</a>
-
-@section Scripts {
+</div></div>
+@* @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+ *@

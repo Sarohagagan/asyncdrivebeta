@@ -1,4 +1,4 @@
-﻿using asyncDrive.Web.Models;
+using asyncDrive.Web.Models;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -20,14 +20,31 @@ namespace asyncDrive.Web.Services
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
-        public async Task<List<WebsiteDto>> GetAllWebsitesAsync()
+        public async Task<List<WebsiteDto>> GetAllWebsitesAsync(string accessToken)
         {
-            var response = await _httpClient.GetAsync("website");
-            if (!response.IsSuccessStatusCode)
-                return null;
+            try
+            {
+                SetAuthorizationHeader(accessToken);
+                var response = await _httpClient.GetAsync("api/website");
 
-            var responseContent = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<List<WebsiteDto>>(responseContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                response.EnsureSuccessStatusCode();
+                
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var websites = JsonSerializer.Deserialize<List<WebsiteDto>>(
+                    responseContent,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                );
+                
+                return websites ?? new List<WebsiteDto>();
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Failed to fetch websites: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                throw new Exception($"Failed to parse website data: {ex.Message}");
+            }
         }
 
         public async Task<WebsiteDto> GetWebsiteByIdAsync(int id)

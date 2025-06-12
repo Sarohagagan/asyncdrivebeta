@@ -1,7 +1,9 @@
 ﻿@model asyncDrive.Web.Models.DTO.UserDetailDto
-
-<h2>User Details</h2>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="width: 100%;">
+        <h3 class="text-left mb-4">User Details</h3>
 <p><strong>ID:</strong> @Model.Id</p>
 <p><strong>Name:</strong> @Model.UserName</p>
 
 <a class="btn btn-secondary" asp-controller="Users" asp-action="AllUsers">Back to Users</a>
+</div></div>

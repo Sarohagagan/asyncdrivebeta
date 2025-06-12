@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "CreateWebsite";
+}
+
+<h1>Create Website</h1>
+@* <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ *@
+<script>
+    function saveWebsite() {
+        var inputData = {
+            title: $("#title").val(),
+            dns: $("#dns").val(),
+            description: $("#description").val(),
+            status: $("#status").prop("checked"), // Checkbox (true/false)
+            jsonData: $("#jsonData").val(),
+            userId: localStorage.getItem("userId") // Retrieve stored user ID
+        };
+
+        $.ajax({
+            url: "http://localhost:5222/api/website", // API endpoint
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(inputData),
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("accessToken") // JWT Token
+            },
+            success: function (response) {
+                alert("Website created successfully!");
+            },
+            error: function (xhr) {
+                if (xhr.status === 401) {
+                    alert("Session expired. Please log in again.");
+                    localStorage.removeItem("accessToken"); // Clear expired token
+                    window.location.href = "/Login"; // Redirect to login page
+                } else {
+                    alert("Error: " + xhr.responseText);
+                }
+            }
+        });
+    }
+</script>
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="width: 100%;">
+        <h3 class="text-center mb-4">Create Website</h3>
+        <form onsubmit="event.preventDefault(); saveWebsite();">
+            <input type="text" id="title" placeholder="Enter Title" class="form-control" required /><br>
+            <input type="text" id="dns" placeholder="Enter DNS" class="form-control" required /><br>
+            <input type="text" id="description" placeholder="Enter Description" class="form-control" required /><br>
+            <input type="checkbox" id="status" /> Active?<br>
+            <input type="text" id="jsonData" placeholder="Enter JSON Data" class="form-control" required /><br>
+            <button type="submit" class="btn btn-primary">Create Website</button>
+        </form>
+    </div>
+</div>

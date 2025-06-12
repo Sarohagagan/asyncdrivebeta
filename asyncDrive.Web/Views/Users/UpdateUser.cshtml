@@ -1,6 +1,8 @@
 ﻿@model asyncDrive.Web.Models.DTO.UpdateUserDto
 
-<h2>Update User</h2>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="width: 100%;">
+        <h3 class="text-left mb-4">Update User</h3>
 
 <form asp-action="UpdateUser" method="post">
     <div class="form-group">
@@ -15,3 +17,4 @@
 </form>
 
 <a class="btn btn-secondary mt-2" asp-controller="Users" asp-action="AllUsers">Back to Users</a>
+    </div></div>     

@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "GetAllWebsite";
+}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="width: 100%;">
+<h2>All Websites</h2>
+
+@* <button onclick="fetchWebsites()" class="btn btn-primary">Load Websites</button> *@
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>DNS</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody id="websitesTable">
+        <!-- Websites will be inserted here -->
+    </tbody>
+</table>
+</div></div>
+
+<script>
+    $(document).ready(function () {
+        fetchWebsites();
+    });
+
+    function fetchWebsites() {
+        $.ajax({
+            url: '@Url.Action("GetAllWebsites", "Website", new { area = "" })',
+            type: 'GET',
+            success: function (data) {
+                if (data && data.length > 0) {
+                    let rows = '';
+                    data.forEach(function (website) {
+                        rows += `<tr>
+                            <td>${website.title || ''}</td>
+                            <td>${website.dns || ''}</td>
+                            <td>${website.description || ''}</td>
+                            <td>
+                                <span class="badge ${website.status ? 'bg-success' : 'bg-danger'}">
+                                    ${website.status ? 'Active' : 'Inactive'}
+                                </span>
+                            </td>
+                        </tr>`;
+                    });
+                    $('#websitesTable').html(rows);
+                } else {
+                    $('#websitesTable').html('<tr><td colspan="4" class="text-center">No websites found</td></tr>');
+                }
+            },
+            error: function (xhr) {
+                if (xhr.status === 401) {
+                    window.location.href = '/Auth/Login';
+                } else {
+                    const errorMessage = xhr.responseJSON?.message || 'An error occurred while loading websites';
+                    $('#websitesTable').html(`<tr><td colspan="4" class="text-center text-danger">${errorMessage}</td></tr>`);
+                }
+            }
+        });
+    }
+</script>

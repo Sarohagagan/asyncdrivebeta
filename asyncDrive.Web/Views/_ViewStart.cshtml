@@ -1,3 +1,23 @@
 ﻿@{
-    Layout = "_Layout";
+    var controller = Context.Request.RouteValues["controller"]?.ToString();
+    if (controller == "Users")
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else if (controller == "Auth")
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else if (controller == "Login")
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else if (controller == "Website")
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }

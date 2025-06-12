@@ -1,14 +1,9 @@
 ﻿@model asyncDrive.Web.Models.LoginDto
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
             <h3 class="text-center mb-4">Login</h3>
@@ -51,5 +46,3 @@
             </form>
         </div>
     </div>
-</body>
-</html>
